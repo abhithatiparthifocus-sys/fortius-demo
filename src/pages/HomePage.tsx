@@ -1,6 +1,7 @@
 import { ArrowRight, Dumbbell, Gift, Sparkles } from 'lucide-react';
 import CtaLink from '@/components/CtaLink';
 import FacilityHighlights from '@/components/FacilityHighlights';
+import Reveal from '@/components/Reveal';
 import SportCard from '@/components/SportCard';
 import { BOOKING_URL, REFER_URL } from '@/data/links';
 import { SPORTS } from '@/data/sports';
@@ -51,9 +52,9 @@ export default function HomePage() {
       </section>
 
       <section className="bg-accent-700 text-white">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-center lg:px-8">
+        <Reveal className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-center lg:px-8">
           <div className="flex items-center gap-5">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/15">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/15 transition-transform duration-500 hover:scale-110 hover:rotate-6">
               <Gift className="h-7 w-7" aria-hidden="true" />
             </span>
             <div>
@@ -66,25 +67,30 @@ export default function HomePage() {
           <CtaLink to={REFER_URL} variant="secondary" showArrow>
             Refer Now!
           </CtaLink>
-        </div>
+        </Reveal>
       </section>
 
       <section className="border-b border-brand-100 bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-brand-100 px-4 sm:px-6 md:grid-cols-3 md:divide-x md:divide-y-0 lg:px-8">
-          {STATS.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center py-10 text-center">
+          {STATS.map((stat, index) => (
+            <Reveal
+              key={stat.label}
+              delay={index * 120}
+              className="flex flex-col items-center py-10 text-center"
+            >
               <span className="font-display text-5xl font-bold text-brand-800">{stat.value}</span>
-              <span className="mt-2 font-display text-sm font-bold uppercase tracking-[0.25em] text-accent-700">
+              <span className="mt-2 h-1 w-12 origin-center rounded-full bg-lime-500 animate-count-bar" style={{ animationDelay: `${index * 120 + 200}ms` }} />
+              <span className="mt-3 font-display text-sm font-bold uppercase tracking-[0.25em] text-accent-700">
                 {stat.label}
               </span>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="bg-brand-50/60 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <p className="font-display text-sm font-bold uppercase tracking-[0.3em] text-accent-700">Our Sports</p>
             <h2 className="mt-3 font-display text-4xl font-bold uppercase text-brand-900 sm:text-5xl">
               Play Your Way
@@ -92,10 +98,12 @@ export default function HomePage() {
             <p className="mt-4 text-base text-brand-600">
               Pick the sport you love, or combine them. Sign up for a membership and start playing this week.
             </p>
-          </div>
+          </Reveal>
           <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {SPORTS.map((sport) => (
-              <SportCard key={sport.slug} sport={sport} />
+            {SPORTS.map((sport, index) => (
+              <Reveal key={sport.slug} delay={index * 150} variant="up">
+                <SportCard sport={sport} />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -103,23 +111,31 @@ export default function HomePage() {
 
       <section className="relative overflow-hidden bg-brand-800 py-20 text-white">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 text-center sm:px-6 lg:px-8">
-          <Dumbbell className="h-10 w-10 text-accent-300" aria-hidden="true" />
-          <h2 className="font-display text-3xl font-bold uppercase tracking-wide sm:text-5xl">
-            Love all? You can Dink, Ping Pong and Smash!
-          </h2>
-          <p className="max-w-2xl text-base text-brand-100 sm:text-lg">
-            Get the combo membership and play every sport we offer, all in one place.
-          </p>
-          <CtaLink to="/membership" variant="accent">
-            Combo Membership
-          </CtaLink>
+          <Reveal variant="scale">
+            <Dumbbell className="mx-auto h-10 w-10 text-lime-400" aria-hidden="true" />
+          </Reveal>
+          <Reveal delay={120}>
+            <h2 className="font-display text-3xl font-bold uppercase tracking-wide sm:text-5xl">
+              Love all? You can Dink, Ping Pong and Smash!
+            </h2>
+          </Reveal>
+          <Reveal delay={240}>
+            <p className="max-w-2xl text-base text-brand-100 sm:text-lg">
+              Get the combo membership and play every sport we offer, all in one place.
+            </p>
+          </Reveal>
+          <Reveal delay={360}>
+            <CtaLink to="/membership" variant="accent">
+              Combo Membership
+            </CtaLink>
+          </Reveal>
         </div>
       </section>
 
       <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
+            <Reveal variant="left">
               <p className="font-display text-sm font-bold uppercase tracking-[0.3em] text-accent-700">Coaching</p>
               <h2 className="mt-3 font-display text-4xl font-bold uppercase text-brand-900 sm:text-5xl">
                 Interested to get trained?
@@ -131,25 +147,27 @@ export default function HomePage() {
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </CtaLink>
               </div>
-            </div>
-            <img
-              src="https://images.pexels.com/photos/26238663/pexels-photo-26238663.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-              alt="A player training on an indoor badminton court"
-              loading="lazy"
-              className="aspect-[4/3] w-full rounded-3xl object-cover shadow-xl"
-            />
+            </Reveal>
+            <Reveal variant="right">
+              <img
+                src="https://images.pexels.com/photos/26238663/pexels-photo-26238663.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                alt="A player training on an indoor badminton court"
+                loading="lazy"
+                className="aspect-[4/3] w-full rounded-3xl object-cover shadow-xl transition-transform duration-700 hover:scale-[1.02]"
+              />
+            </Reveal>
           </div>
         </div>
       </section>
 
       <section className="bg-brand-50/60 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <p className="font-display text-sm font-bold uppercase tracking-[0.3em] text-accent-700">The Facility</p>
             <h2 className="mt-3 font-display text-4xl font-bold uppercase text-brand-900 sm:text-5xl">
               Built for Performance
             </h2>
-          </div>
+          </Reveal>
           <div className="mt-12">
             <FacilityHighlights />
           </div>
@@ -158,26 +176,30 @@ export default function HomePage() {
 
       <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <CtaLink
-            to="/pro-shop"
-            variant="primary"
-            className="!flex-col !items-start !justify-end !rounded-3xl !px-8 !py-12 !text-left !text-base"
-          >
-            <span className="font-display text-3xl font-bold uppercase">Pro Shop</span>
-            <span className="text-sm font-normal text-brand-100">
-              Yonex badminton gear and Selkirk pickleball paddles, plus stringing service.
-            </span>
-          </CtaLink>
-          <CtaLink
-            to="/deals"
-            variant="accent"
-            className="!flex-col !items-start !justify-end !rounded-3xl !px-8 !py-12 !text-left !text-base"
-          >
-            <span className="font-display text-3xl font-bold uppercase">Deal Zone</span>
-            <span className="text-sm font-normal text-accent-50">
-              Member offers and referral rewards to help you save on your first month.
-            </span>
-          </CtaLink>
+          <Reveal variant="left">
+            <CtaLink
+              to="/pro-shop"
+              variant="primary"
+              className="!flex-col !items-start !justify-end !rounded-3xl !px-8 !py-12 !text-left !text-base"
+            >
+              <span className="font-display text-3xl font-bold uppercase">Pro Shop</span>
+              <span className="text-sm font-normal text-brand-100">
+                Yonex badminton gear and Selkirk pickleball paddles, plus stringing service.
+              </span>
+            </CtaLink>
+          </Reveal>
+          <Reveal variant="right" delay={150}>
+            <CtaLink
+              to="/deals"
+              variant="accent"
+              className="!flex-col !items-start !justify-end !rounded-3xl !px-8 !py-12 !text-left !text-base"
+            >
+              <span className="font-display text-3xl font-bold uppercase">Deal Zone</span>
+              <span className="text-sm font-normal text-accent-50">
+                Member offers and referral rewards to help you save on your first month.
+              </span>
+            </CtaLink>
+          </Reveal>
         </div>
       </section>
     </>

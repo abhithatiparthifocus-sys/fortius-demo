@@ -1,4 +1,5 @@
 import { Award, GraduationCap, Lightbulb, Sofa } from 'lucide-react';
+import Reveal from '@/components/Reveal';
 
 const FACILITY_FEATURES = [
   {
@@ -26,17 +27,16 @@ const FACILITY_FEATURES = [
 export default function FacilityHighlights() {
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {FACILITY_FEATURES.map(({ icon: Icon, title, text }) => (
-        <div
-          key={title}
-          className="group rounded-2xl border border-brand-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-300 hover:shadow-lg"
-        >
-          <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50 text-accent-700 transition-colors duration-300 group-hover:bg-accent-700 group-hover:text-white">
-            <Icon className="h-6 w-6" aria-hidden="true" />
-          </span>
-          <h3 className="mt-5 font-display text-lg font-bold uppercase text-brand-900">{title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-brand-600">{text}</p>
-        </div>
+      {FACILITY_FEATURES.map(({ icon: Icon, title, text }, index) => (
+        <Reveal key={title} delay={index * 120} variant="up">
+          <div className="group rounded-2xl border border-brand-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-300 hover:shadow-lg">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50 text-accent-700 transition-all duration-300 group-hover:bg-accent-700 group-hover:text-white group-hover:scale-110">
+              <Icon className="h-6 w-6" aria-hidden="true" />
+            </span>
+            <h3 className="mt-5 font-display text-lg font-bold uppercase text-brand-900">{title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-brand-600">{text}</p>
+          </div>
+        </Reveal>
       ))}
     </div>
   );

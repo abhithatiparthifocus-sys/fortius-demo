@@ -1,6 +1,7 @@
 import CtaLink from '@/components/CtaLink';
 import FacilityHighlights from '@/components/FacilityHighlights';
 import PageHero from '@/components/PageHero';
+import Reveal from '@/components/Reveal';
 import SportCard from '@/components/SportCard';
 import { SPORTS } from '@/data/sports';
 
@@ -21,13 +22,15 @@ export default function CourtsPage() {
 
       <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <p className="font-display text-sm font-bold uppercase tracking-[0.3em] text-accent-700">Choose a Sport</p>
             <h2 className="mt-3 font-display text-4xl font-bold uppercase text-brand-900 sm:text-5xl">Our Courts</h2>
-          </div>
+          </Reveal>
           <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {SPORTS.map((sport) => (
-              <SportCard key={sport.slug} sport={sport} />
+            {SPORTS.map((sport, index) => (
+              <Reveal key={sport.slug} delay={index * 150}>
+                <SportCard sport={sport} />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -35,12 +38,12 @@ export default function CourtsPage() {
 
       <section className="bg-brand-50/60 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <p className="font-display text-sm font-bold uppercase tracking-[0.3em] text-accent-700">Facility Standards</p>
             <h2 className="mt-3 font-display text-4xl font-bold uppercase text-brand-900 sm:text-5xl">
               Built for Performance
             </h2>
-          </div>
+          </Reveal>
           <div className="mt-12">
             <FacilityHighlights />
           </div>

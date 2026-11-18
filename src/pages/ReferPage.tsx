@@ -1,6 +1,7 @@
 import { Gift, Percent, Trophy } from 'lucide-react';
 import CtaLink from '@/components/CtaLink';
 import PageHero from '@/components/PageHero';
+import Reveal from '@/components/Reveal';
 import { REFER_URL } from '@/data/links';
 
 const REFER_OFFERS = [
@@ -34,30 +35,31 @@ export default function ReferPage() {
       <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-2">
-            {REFER_OFFERS.map(({ icon: Icon, title, text }) => (
-              <div
-                key={title}
-                className="flex flex-col gap-5 rounded-3xl border border-brand-100 bg-brand-50/50 p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10"
-              >
-                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-700 text-white">
-                  <Icon className="h-7 w-7" aria-hidden="true" />
-                </span>
-                <h2 className="font-display text-3xl font-bold uppercase text-brand-900">{title}</h2>
-                <p className="text-base leading-relaxed text-brand-600">{text}</p>
-              </div>
+            {REFER_OFFERS.map(({ icon: Icon, title, text }, index) => (
+              <Reveal key={title} delay={index * 180} variant={index === 0 ? 'left' : 'right'}>
+                <div className="flex h-full flex-col gap-5 rounded-3xl border border-brand-100 bg-brand-50/50 p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-700 text-white transition-transform duration-300 hover:scale-110">
+                    <Icon className="h-7 w-7" aria-hidden="true" />
+                  </span>
+                  <h2 className="font-display text-3xl font-bold uppercase text-brand-900">{title}</h2>
+                  <p className="text-base leading-relaxed text-brand-600">{text}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
 
-          <div className="mt-12 flex flex-col items-center gap-6 rounded-3xl bg-brand-800 px-6 py-12 text-center text-white sm:px-12">
-            <Gift className="h-10 w-10 text-accent-300" aria-hidden="true" />
-            <h2 className="font-display text-3xl font-bold uppercase tracking-wide sm:text-4xl">Refer more! Win more!</h2>
-            <p className="max-w-2xl text-base text-brand-100">
-              Ready to share the game? Start your referral and enjoy your first month at 10% off.
-            </p>
-            <CtaLink to="/membership" variant="accent">
-              Join Us
-            </CtaLink>
-          </div>
+          <Reveal delay={200}>
+            <div className="mt-12 flex flex-col items-center gap-6 rounded-3xl bg-brand-800 px-6 py-12 text-center text-white sm:px-12">
+              <Gift className="h-10 w-10 text-lime-400" aria-hidden="true" />
+              <h2 className="font-display text-3xl font-bold uppercase tracking-wide sm:text-4xl">Refer more! Win more!</h2>
+              <p className="max-w-2xl text-base text-brand-100">
+                Ready to share the game? Start your referral and enjoy your first month at 10% off.
+              </p>
+              <CtaLink to="/membership" variant="accent">
+                Join Us
+              </CtaLink>
+            </div>
+          </Reveal>
         </div>
       </section>
     </>

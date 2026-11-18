@@ -16,7 +16,7 @@ export default function PageHero({ eyebrow, title, description, image, actions, 
         src={image}
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 -z-10 h-full w-full object-cover opacity-60"
+        className="absolute inset-0 -z-10 h-full w-full object-cover opacity-60 animate-scale-in"
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-brand-900 via-brand-900/85 to-brand-900/40" />
       <div
@@ -25,7 +25,7 @@ export default function PageHero({ eyebrow, title, description, image, actions, 
         }`}
       >
         <div className="max-w-2xl animate-fade-up">
-          <p className="font-display text-sm font-bold uppercase tracking-[0.3em] text-accent-300">{eyebrow}</p>
+          <p className="font-display text-sm font-bold uppercase tracking-[0.3em] text-lime-400">{eyebrow}</p>
           <h1 className="mt-4 font-display text-4xl font-bold uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
             {title}
           </h1>

@@ -2,6 +2,7 @@ import { Check } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 import CtaLink from '@/components/CtaLink';
 import PageHero from '@/components/PageHero';
+import Reveal from '@/components/Reveal';
 import SportCard from '@/components/SportCard';
 import { BOOKING_URL } from '@/data/links';
 import { SPORTS, getSportBySlug } from '@/data/sports';
@@ -39,7 +40,7 @@ export default function SportPage() {
 
       <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
-          <div>
+          <Reveal variant="left">
             <p className="font-display text-sm font-bold uppercase tracking-[0.3em] text-accent-700">Highlights</p>
             <h2 className="mt-3 font-display text-4xl font-bold uppercase text-brand-900 sm:text-5xl">
               Why Play {sport.name}
@@ -59,17 +60,18 @@ export default function SportPage() {
                 {sport.name} Coaching
               </CtaLink>
             </div>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-2 gap-4">
             {sport.gallery.map((photo, index) => (
-              <img
-                key={photo}
-                src={photo}
-                alt={`${sport.name} action at Fortius Sports Academy`}
-                loading="lazy"
-                className={`w-full rounded-3xl object-cover shadow-lg ${index === 0 ? 'aspect-[3/4]' : 'mt-12 aspect-[3/4]'}`}
-              />
+              <Reveal key={photo} delay={index * 200} variant={index === 0 ? 'right' : 'up'}>
+                <img
+                  src={photo}
+                  alt={`${sport.name} action at Fortius Sports Academy`}
+                  loading="lazy"
+                  className={`w-full rounded-3xl object-cover shadow-lg transition-transform duration-700 hover:scale-[1.03] ${index === 0 ? 'aspect-[3/4]' : 'mt-12 aspect-[3/4]'}`}
+                />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -77,13 +79,15 @@ export default function SportPage() {
 
       <section className="bg-brand-50/60 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <p className="font-display text-sm font-bold uppercase tracking-[0.3em] text-accent-700">Explore More</p>
             <h2 className="mt-3 font-display text-4xl font-bold uppercase text-brand-900 sm:text-5xl">Other Courts</h2>
-          </div>
+          </Reveal>
           <div className="mt-12 grid gap-8 md:grid-cols-2">
-            {otherSports.map((item) => (
-              <SportCard key={item.slug} sport={item} />
+            {otherSports.map((item, index) => (
+              <Reveal key={item.slug} delay={index * 180}>
+                <SportCard sport={item} />
+              </Reveal>
             ))}
           </div>
         </div>
